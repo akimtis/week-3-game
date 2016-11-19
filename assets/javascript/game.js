@@ -17,8 +17,8 @@
       console.log(options);
       var wins = 0;
       var losses = 0;
-      var guesses = [];
       var guessesLeft = 10;
+      var guesses = [];
       var display = document.querySelector("#display-results");
       /*console.log(display)*/
 
@@ -34,33 +34,41 @@ function displayResults(){
       document.onkeyup = function(event) {
         var key = event.key;
 
-        if (options.indexOf()> -1){
-        return undefined;
+        if (options.indexOf(key) === -1){
+          return;
         }
 
         var computerChoice = options[Math.floor(Math.random() * options.length)];
         console.log(computerChoice);
+
             if (key === computerChoice){
             console.log("Correct!");
             guesses = [];
             wins++;
+            guessesLeft = 10;
             displayResults(guesses, guessesLeft, wins, losses);
-            alert("You are psychic")
-
+            alert("You are psychic");
+            }
+            else if (key !== computerChoice){
+              console.log("Not correct")
+              guesses.push(key);
+              console.log(guesses);
+              guessesLeft--;
+              displayResults(guesses, guessesLeft, wins, losses);
+            }
+            if (guessesLeft == 0){
+              alert("You are not psychic");
+              guesses = [];
+              guessesLeft = 10;
+              losses++;
+              displayResults(guesses, guessesLeft, wins, losses);
+            } 
           }
-          else {
-            console.log("Not correct")
-            guesses.push(key);
-            console.log(guesses);
-            guessesLeft--;
-            losses++;
-            displayResults(guesses, guessesLeft, wins, losses);
-          }
-        }
-       
+         
+             
+         
 
-        //displayResults();
-            
+         
           
         
             
